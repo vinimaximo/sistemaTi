@@ -19,10 +19,11 @@
         <?php include('caroussel.php');?>
         <!-- Área de destaques -->
         <?php include('produtos_destaque.php');?>
-        <a name="destaque">&nbsp;</a>
+        <a name="destaques">&nbsp;</a>
         <!-- Área produtos em geral -->
+         <a name="produtos">&nbsp;</a>
         <?php include('produtos_geral.php');?>
-        <a name="produtos">&nbsp;</a>
+       <hr>
         <!-- Área de rodapé -->
         <footer>
             <?php include('rodape.php');?>
