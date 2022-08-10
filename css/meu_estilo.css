@@ -1,0 +1,8 @@
+@charset "utf-8";
+
+.fundofixo{
+    background: url(../images/carne.jpg)  no-repeat fixed;
+    -webkit-background-size:cover;
+    background-size: cover;
+    
+}
