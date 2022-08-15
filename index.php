@@ -10,7 +10,7 @@
 </head>
 <body class="fundofixo">
     <!-- Área do menu -->
-    <?php include('meu_publico.php');?>
+    <?php include('menu_publico.php');?>
     <a name="home"></a>
     <main class="container">
 
