@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,7 +16,7 @@
 
    
         <!-- Área do caroussel -->
-        <?php include('caroussel.php');?>
+        <?php include('carousel.php');?>
         <!-- Área de destaques -->
         <?php include('produtos_destaque.php');?>
         <a name="destaques">&nbsp;</a>
