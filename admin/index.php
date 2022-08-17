@@ -1,6 +1,6 @@
 <?php
 // Incluindo o sistema de autenticação
-    include('acesso_comum.php')
+    include('acesso_com.php')
 ?> 
 <!DOCTYPE html>
 <html lang="pt-BR">
