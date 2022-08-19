@@ -29,10 +29,10 @@ if ($_POST) {
         $_SESSION['login_usuario'] = $login_usuario;
         $_SESSION['nivel_usuario'] = $linha['nivel_usuario'];
         $_SESSION['nome_da_sessao'] = session_name();
-        echo "<script>window.open('index.php','_self')</srcipt>";
+        echo "<script>window.open('index.php','_self')</script>";
     } 
     else {
-        echo "<script>window.open('invasor.php','_self')</srcipt>";
+        echo "<script>window.open('invasor.php','_self')</script>";
     }
 }
 ?>

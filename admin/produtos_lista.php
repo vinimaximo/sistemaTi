@@ -1,4 +1,7 @@
 <?php
+//Incluindo variaveis de sistema
+include('../config.php');
+
 // Incluindo o sistema de autenticação
 include('acesso_com.php');
 
@@ -26,14 +29,14 @@ $totalLinhas = $lista->num_rows;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="../css/meu_estilo.css" type="text/css">
-    <title>Produtos (<?php echo $totalLinhas; ?>) - Lista</title>
+    <title> <?php echo SYS_NAME." - Lista(". $totalLinhas; ?>) Produtos </title>
 </head>
 
-<body class="">
+<body class="fundofixo">
     <?php include('menu_adm.php'); ?>
     <main class="container">
         <h1 class="breadcrumb alert-danger">Lista de Produtos</h1>
-        <table class="table table-condensed table-hover tbopacidade">
+        <table class="table table-condensed table-hover tbopacidade" style="background-color: #e4b9b9;">
             <!-- thead>th*8 -->
             <thead>
                 <th class="hidden">Id</th>
