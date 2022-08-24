@@ -71,7 +71,7 @@ $total_linhas_fk = $lista_fk->num_rows;
     <title><?php echo SYS_NAME . " - " ?> Alterar</title>
 </head>
 
-<body class="">
+<body class="fundofixo">
     <?php include('menu_adm.php'); ?>
     <main class="container">
         <div class="row">
