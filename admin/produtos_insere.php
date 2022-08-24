@@ -6,16 +6,34 @@ include('../config.php');
 //Conexão com banco
 include('../connections/conn.php');
 
-$campos_insert = "id_tipo_produto,destaque_produto,descri_produto,resumo_produto,valor_produto,imagem_produto";
+
 if($_POST){
-    if ($_FILES['imagem_produto']['name']) {
+    if (isset($_POST['enviar'])) {
     $nome_img = $_FILES['imagem_produto']['name'];
     $tmp_img = $_FILES['imagem_produto']['tmp_name'];
     $pasta_img = "../images/" . $nome_img;
     move_uploaded_file($tmp_img, $pasta_img);
-} 
+ 
 }
+$id_tipo_produto = $_POST['id_tipo_produto'];
+$destaque_produto = $_POST['destaque_produto'];
+$descri_produto = $_POST['descri_produto'];
+$resumo_produto = $_POST['resumo_produto'];
+$valor_produto = $_POST['valor_produto'];
+$imagem_produto = $_FILES['imagem_produto']['name'];
 
+$campos_insert = "id_tipo_produto,destaque_produto,descri_produto,resumo_produto,valor_produto,imagem_produto";
+$values = "$id_tipo_produto,'$destaque_produto','$descri_produto','$resumo_produto',$valor_produto,'$imagem_produto'";
+$query = "insert into tbprodutos ($campos_insert) values ($values);";
+$resultado = $conn->query($query);
+
+//Após o insert redireciona a página
+if(mysqli_insert_id($conn)){
+    header("location:produtos_lista.php");
+}else{
+    header("location:produtos_lista.php");
+}
+}
 
 //Chave estrangeira tipo
 $query_tipo = "select * from tbtipos order by rotulo_tipo asc";
@@ -102,7 +120,7 @@ $linha_fk = $lista_fk->fetch_assoc();
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
                                 </span>
-                                <input type="number" class="form-control" id="valor_produto" min="0" step="0.01">
+                                <input type="number" class="form-control" name="valor_produto" id="valor_produto" min="0" step="0.01">
                             </div>
                             <br>
                             <label for="imagem_produto">Imagem</label>

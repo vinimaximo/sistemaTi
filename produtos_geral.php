@@ -3,7 +3,7 @@ include('connections/conn.php');
 
 
 
-$consulta = "select * from vw_tbprodutos order by descri_produto";
+$consulta = "select * from vw_tbprodutos where deletado is null order by descri_produto";
 
 $lista = $conn->query($consulta);
 
