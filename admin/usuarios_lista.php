@@ -51,7 +51,7 @@ $totalLinhas = $lista->num_rows;
                 <th>Nivel</th>
 
                 <th>
-                    <a href="produtos_insere.php" class="btn btn-block btn-primary btn-xs">
+                    <a href="usuario_insere.php" class="btn btn-block btn-primary btn-xs">
                         <span class="hidden-xs">Adicionar<br></span>
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     </a>
