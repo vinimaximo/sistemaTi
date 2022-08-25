@@ -47,6 +47,10 @@
                 <span class="glyphicon glyphicon-envelope" aria-hidden="true">&nbsp;Contato</span>
                 </a>
             </li>
+            <li><a href="index.php#reserva" class="text-danger">
+                <span class="glyphicon glyphicon-calendar" aria-hidden="true">&nbsp;Reserva</span>
+                </a>
+            </li>
                 <li><a href="admin/index.php#" class="text-danger">
                 <span class="glyphicon glyphicon-user" aria-hidden="true">&nbsp;Administração</span>
                 </a>

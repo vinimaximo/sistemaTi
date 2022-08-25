@@ -12,10 +12,10 @@ include('../connections/conn.php');
 //Selecionando os dados
 $consulta = "select * from tbtipos order by rotulo_tipo asc";
 
-// Buscar a lista completa de produtos
+// Buscar a lista completa de tipos
 $lista = $conn->query($consulta);
 
-// Separar produtos por linha
+// Separar tipos por linha
 $linha = $lista->fetch_assoc();
 
 // Contar número de linhas da lista
@@ -31,7 +31,7 @@ $totalLinhas = $lista->num_rows;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="../css/meu_estilo.css" type="text/css">
-    <title><?php echo SYS_NAME." - Lista(". $totalLinhas; ?>) Produtos</title>
+    <title><?php echo SYS_NAME." - Lista(". $totalLinhas; ?>) Tipos</title>
 </head>
 
 <body class="fundofixo">
@@ -77,7 +77,7 @@ $totalLinhas = $lista->num_rows;
                             <?php echo $linha['rotulo_tipo'] ?>
                         </td>
                         <td>
-                            <a href="produto_atualiza.php?id_tipo=<?php echo $linha['id_tipo'] ?>" class="btn btn-warning btn-block btn-xs">
+                            <a href="tipos_atualiza.php?id_tipo=<?php echo $linha['id_tipo'] ?>" class="btn btn-warning btn-block btn-xs">
                                 <span class="hidden-xs">Alterar <br></span>
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                             </a>
@@ -109,7 +109,7 @@ $totalLinhas = $lista->num_rows;
                     <h4 class="modal-title text-danger">Atenção</h4>
                 </div>
                 <div class="modal-body">
-                    Deseja Realmente  <strong>Excluir</strong> Este Produto ?
+                    Deseja Realmente  <strong>Excluir</strong> Este Tipo ?
                     <h3><span class="text-danger nome"></span></h3>
                 </div>
                 <div class="modal-footer">
@@ -135,7 +135,7 @@ $totalLinhas = $lista->num_rows;
             //Insere o nome do item na confirmação do Modal
             $('span.nome').text(nome);
             //Envia o id através do link do botão para confirmar 
-            $('a.delete-yes').attr('href','produto_excluir.php?id_produto='+id);
+            $('a.delete-yes').attr('href','tipos_excluir.php?id_tipo='+id);
             //Abre o Modal
             $('#myModal').modal('show');
         })

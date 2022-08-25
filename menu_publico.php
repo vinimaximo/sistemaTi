@@ -45,6 +45,7 @@ $totalLinhas = $listaTipos->num_rows;
                     </li>
                     <li><a href="index.php#destaques">Destaques</a></li>
                     <li><a href="index.php#produtos">Produtos</a></li>
+                    <li><a href="index.php#reserva">Reserva</a></li>
                     <!--Dropdown-->
                     <li class="dropdown">
                         <a href="" 

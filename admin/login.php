@@ -30,17 +30,49 @@ if ($_POST) {
         $_SESSION['nivel_usuario'] = $linha['nivel_usuario'];
         $_SESSION['nome_da_sessao'] = session_name();
         echo "<script>window.open('index.php','_self')</script>";
-    } 
-    else {
-        echo "<script>window.open('invasor.php','_self')</script>";
-    }
-}
+
+            }else if ($_POST) {
+                //definindo o USE do banco de dados
+                mysqli_select_db($conn, $database_conn);
+                //verifica login e senha recebidos
+                $login_reserva = $_POST['login_reserva'];
+                $senha_reserva = $_POST['senha_reserva'];
+            
+                $verificaSQL = "select * 
+                from tbreserva 
+                where login_reserva = '$login_reserva' 
+                and senha_reserva = '$senha_reserva'
+                ";
+                echo $verificaSQL;
+                //carregar os dados e verificar a linha de retorno, caso exista
+                $lista_session = mysqli_query($conn, $verificaSQL);
+                $linha = $lista_session->fetch_assoc();
+                $numero_linhas = mysqli_num_rows($lista_session);
+            
+                // se a sessão não existir, iniciamos uma sessão
+                if (!isset($_SESSION)) {
+                    $sessao_antiga = session_name("Chulettaaa");
+                    session_start();
+                    $sessao_name_new = session_name(); //Recupera o nome atual
+                }
+                if ($linha!=null) {
+                    $_SESSION['login_reserva'] = $login_reserva;
+                    $_SESSION['id_tipo_reserva'] = $linha['id_tipo_reserva'];
+                    $_SESSION['nome_da_sessao'] = session_name();
+                    echo "<script>window.open('../reserva/area_reserva.php','_self')</script>";
+                
+                } else {
+                    echo "<script>window.open('invasor.php','_self')</script>";
+                }
+            
+        }
+        }
 ?>
 
 
 
 <!doctype html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
     <meta http-equiv="refresh" content="30;URL=../index.php">

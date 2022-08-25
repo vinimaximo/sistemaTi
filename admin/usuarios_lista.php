@@ -71,15 +71,15 @@ $totalLinhas = $lista->num_rows;
                         </td>
                         <td>
                             <?php
-                            if ($linha['nivel_usuario'] == 'sup') {
+                            if ($linha['id_nivel_usuario'] == 'sup') {
                                 echo ("<span class='glyphicon glyphicon-lock text-danger aria-hidden='true'></span>");
-                            } else if($linha['nivel_usuario'] == 'com') {
+                            } else if($linha['id_nivel_usuario'] == 'com') {
                                 echo ("<span class='glyphicon glyphicon-bitcoin text-info aria-hidden='true'></span>");
-                            } else if($linha['nivel_usuario'] == 'cli'){
+                            } else if($linha['id_nivel_usuario'] == 'cli'){
                                 echo ("<span class='glyphicon glyphicon-user text-success aria-hidden='true'></span>");
                             }
                             ?>
-                            <?php echo $linha['nivel_usuario']; ?>
+                            <?php echo $linha['id_nivel_usuario']; ?>
                         </td>  
                         <td>
                             <a href="usuario_atualiza.php?id_usuario=<?php echo $linha['id_usuario']; ?>" class="btn btn-warning btn-block btn-xs">
