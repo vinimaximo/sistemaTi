@@ -1,4 +1,4 @@
- -- create database sistemaDb;
+-- create database sistemaDb;
  -- use sistemaDb;
 -- estrutura da Tabela de produtos
 create table tbprodutos(
@@ -44,17 +44,19 @@ INSERT INTO `tbtipos` (`id_tipo`, `sigla_tipo`, `rotulo_tipo`) VALUES
 -- Estrutura da tabela tbusarios
 create table tbusuarios(
 id_usuario int(11) not null,
+id_tipo_usuario int not null,
 login_usuario varchar(30) not null unique,
 senha_usuario varchar(8) not null,
 nivel_usuario enum('sup','com','cli') not null
 )engine=InnoDB default charset=utf8;
 
-INSERT INTO `tbusuarios` (`id_usuario`, `login_usuario`, `senha_usuario`, `nivel_usuario`) VALUES
-(1, 'senac', '1234', 'sup'),
-(2, 'joao', '4568', 'com'),
-(3, 'maria', '7894', 'cli'),
-(4, 'well', '1234', 'sup'),
-(5, 'Vini', '111', 'sup');
+INSERT INTO `tbusuarios` (`id_usuario`,`id_tipo_usuario`, `login_usuario`, `senha_usuario`, `nivel_usuario`) VALUES
+(1, '2','senac', '1234', 'sup'),
+(2, '3','joao', '4568', 'com'),
+(3, '2','maria', '7894', 'cli'),
+(4, '3','well', '1234', 'sup'),
+(5,'2', 'Vini', '111', 'sup'),
+(7, '3', 'jose','3322', 'cli');
 
 
 -- índices da tabela tbprodutos
@@ -97,8 +99,8 @@ p.id_produto,
       p.resumo_produto,
       p.valor_produto, 
       p.imagem_produto, 
-      p.destaque_produto,
-      p.deletado
+      p.destaque_produto
+      
       
 from tbprodutos p 
 join tbtipos t 
