@@ -71,15 +71,15 @@ $totalLinhas = $lista->num_rows;
                         </td>
                         <td>
                             <?php
-                            if ($linha['id_nivel_usuario'] == 'sup') {
+                            if ($linha['nivel_usuario'] == 'sup') {
                                 echo ("<span class='glyphicon glyphicon-lock text-danger aria-hidden='true'></span>");
-                            } else if($linha['id_nivel_usuario'] == 'com') {
+                            } else if($linha['nivel_usuario'] == 'com') {
                                 echo ("<span class='glyphicon glyphicon-bitcoin text-info aria-hidden='true'></span>");
-                            } else if($linha['id_nivel_usuario'] == 'cli'){
+                            } else if($linha['nivel_usuario'] == 'cli'){
                                 echo ("<span class='glyphicon glyphicon-user text-success aria-hidden='true'></span>");
                             }
                             ?>
-                            <?php echo $linha['id_nivel_usuario']; ?>
+                            <?php echo $linha['nivel_usuario']; ?>
                         </td>  
                         <td>
                             <a href="usuario_atualiza.php?id_usuario=<?php echo $linha['id_usuario']; ?>" class="btn btn-warning btn-block btn-xs">
@@ -143,7 +143,7 @@ $totalLinhas = $lista->num_rows;
             //Insere o nome do item na confirmação do Modal
             $('span.nome').text(nome);
             //Envia o id através do link do botão para confirmar 
-            $('a.delete-yes').attr('href','produto_excluir.php?id_produto='+id);
+            $('a.delete-yes').attr('href','usuario_excluir.php?id_usuario='+id);
             //Abre o Modal
             $('#myModal').modal('show');
         })

@@ -7,7 +7,7 @@ include('../connections/conn.php');
 if ($_POST) {
     //Reber os dados do formulário
     //organizar os campos na mesma ordem
-    $id_nivel_usuario = $_POST['id_nivel_usuario'];
+    $nivel_usuario = $_POST['nivel_usuario'];
     $login_usuario = $_POST['login_usuario'];
     $senha_usuario = $_POST['senha_usuario'];
   
@@ -17,15 +17,15 @@ if ($_POST) {
 
     //Consulta(query) Sql para inserção dos dados
     $query = "update tbusuarios
-                            set id_nivel_usuario = '" . $id_nivel_usuario . "',
+                            set nivel_usuario = '" . $nivel_usuario . "',
                             login_usuario = '" . $login_usuario . "',
                             senha_usuario = '" . $senha_usuario . "',                       
                             where id_usuario = " . $id_filtro . ";";
 
-    $resultado = $conexao->query($query);
+    $resultado = $conn->query($query);
 
     //Após a ação a página será direcionada
-    if (mysqli_insert_id($conexao)) {
+    if (mysqli_insert_id($conn)) {
         header('location: usuarios_lista.php');
     } else {
         header('location: usuarios_lista.php');
@@ -35,20 +35,20 @@ if ($_POST) {
 //Consulta para recuperar dados do filtro da chamada da página...
 $id_alterar = $_GET['id_usuario'];
 $query_busca = "select * from tbusuarios where id_usuario = " . $id_alterar;
-$lista = $conexao->query($query_busca);
+$lista = $conn->query($query_busca);
 $linha = $lista->fetch_assoc();
 $totalLinhas = $lista->num_rows;
 
-$consulta_fk = "select * from tbnivel order by nome_nivel asc";
+$consulta_fk = "select * from tbusuarios order by login_usuario asc";
 
-$lista_fk = $conexao->query($consulta_fk);
+$lista_fk = $conn->query($consulta_fk);
 $linha_fk = $lista_fk->fetch_assoc();
 $totalLinha_fk = $lista_fk->num_rows;
 
 
 ?>
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
@@ -78,21 +78,21 @@ $totalLinha_fk = $lista_fk->num_rows;
                         <form action="usuario_atualiza.php" method="post" id="form_usuario_atualiza" name="usuario_atualiza" enctype="multipart/form-data">
                             <!--Inserir o campo id_usuário oculto para uso no filtro -->
                             <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $linha['id_usuario']; ?>">
-                            <!-- Select id_nivel_usuario -->
-                            <label for="id_nivel_usuario">Nível do Usuário:</label>
+                            <!-- Select nivel_usuario -->
+                            <label for="nivel_usuario">Nível do Usuário:</label>
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
                                 </span>
 
-                                <select name="id_nivel_usuario" id="id_nivel_usuario" class="form-control" required>
+                                <select name="nivel_usuario" id="nivel_usuario" class="form-control" required>
                                     <?php do { ?>
-                                        <option value="<?php echo $linha_fk['id_nivel']; ?>" <?php
-                                                                                                if (!(strcmp($linha_fk['id_nivel'], $linha['id_nivel_usuario']))) {
+                                        <option value="<?php echo $linha_fk['id_usuario']; ?>" <?php
+                                                                                                if (!(strcmp($linha_fk['id_usuario'], $linha['nivel_usuario']))) {
                                                                                                     echo "selected=\"selected\"";
                                                                                                 } ?>>
 
-                                            <?php echo $linha_fk['nome_nivel']; ?>
+                                            <?php echo $linha_fk['nivel_usuario']; ?>
                                         </option>
                                     <?php } while ($linha_fk = $lista_fk->fetch_assoc());
                                     $linhas_fk = mysqli_num_rows($lista_fk);
@@ -122,22 +122,8 @@ $totalLinha_fk = $lista_fk->num_rows;
                                 <input type="password" class="form-control" id="senha_usuario" name="senha_usuario" maxlength="12" required value="<?php echo $linha['senha_usuario']; ?>" placeholder="Digite o titulo do produto...">
                             </div>
                             <br>
-                            <!-- file foto_usuario Atual-->
-                            <label for="foto_usuario_atual">Foto Atual:</label>
-                            <img src="../images/<?php echo $linha['foto_usuario']; ?>" alt="" class="img-responsive" style="max-width: 40%;">
-                            <!-- Guarda o nome da foto caso ela não seja alterada -->
-                            <input type="hidden" name="foto_usuario_atual" id="foto_usuario_atual" value="<?php echo $linha['foto_usuario']; ?>">
-                            <br>
-                            <!-- file foto_usuario Nova-->
-                            <label for="foto_usuario">Nova Foto:</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
-                                </span>
-                                <img src="" alt="" name="foto" id="foto" class="img-responsive">
-                                <input type="file" name="foto_usuario" id="foto_usuario" class="form-control" accept="image/*">
-                            </div>
-                            <br>
+                            
+                            
                             <!-- Botão Enviar -->
                             <input type="submit" value="Atualizar" name="enviar" id="enviar" class="btn btn-danger btn-block">
                         </form>
@@ -146,38 +132,11 @@ $totalLinha_fk = $lista_fk->num_rows;
             </div>
         </div>
     </main>
-    <!-- Script para a imagem -->
-    <script>
-        document.getElementById("foto_usuario").onchange = function() {
-            var reader = new FileReader();
-            if (this.files[0].size > 528385) {
-                alert("A imagem deve ter no máximo 500KB");
-                $("#foto").attr("src", "blank");
-                $("#foto").hide();
-                $("#foto_usuario").wrap('<form>').closest('form').get(0).reset();
-                $("#foto_usuario").unwrap();
-                return false;
 
-            }
-            // Verifica se o input do titpo file possui dado
-            if (this.files[0].type.indexOf("image") == -1) {
-                alert("Formato inválido, escolha uma imagem!");
-                $("#foto").attr("src", "blank");
-                $("#foto").hide();
-                $("#foto_usuario").wrap('<form>').closest('form').get(0).reset();
-                $("#foto_usuario").unwrap();
-                return false;
-            };
-            reader.onload = function(e) {
-                //Obter dados  carregados e renderizar a miniatura
-                document.getElementById("#foto").src = e.target.result;
-                $("#foto").show();
-            };
-            reader.readAsDataURL(this.files[0]);
-        };
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js">
     </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" 
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </body>
 
 </html>
