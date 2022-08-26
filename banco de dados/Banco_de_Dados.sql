@@ -43,20 +43,44 @@ INSERT INTO `tbtipos` (`id_tipo`, `sigla_tipo`, `rotulo_tipo`) VALUES
 
 -- Estrutura da tabela tbusarios
 create table tbusuarios(
-id_usuario int(11) not null,
-id_tipo_usuario int not null,
+id_usuario int(11) primary key auto_increment  not null,
 login_usuario varchar(30) not null unique,
 senha_usuario varchar(8) not null,
-nivel_usuario enum('sup','com','cli') not null
+id_nivel_usuario int(11) not null
 )engine=InnoDB default charset=utf8;
 
-INSERT INTO `tbusuarios` (`id_usuario`,`id_tipo_usuario`, `login_usuario`, `senha_usuario`, `nivel_usuario`) VALUES
-(1, '2','senac', '1234', 'sup'),
-(2, '3','joao', '4568', 'com'),
-(3, '2','maria', '7894', 'cli'),
-(4, '3','well', '1234', 'sup'),
-(5,'2', 'Vini', '111', 'sup'),
-(7, '3', 'jose','3322', 'cli');
+INSERT INTO `tbusuarios` (`id_usuario`, `login_usuario`, `senha_usuario`, `id_nivel_usuario`) VALUES
+(1, 'senac', '1234', 1),
+(2, 'joao', '4568', 2),
+(3, 'maria', '7894', 3),
+(4, 'well', '1234', 1),
+(5, 'vini', '111', 1);
+
+
+create table tbnivel(
+id_nivel int(11) primary key auto_increment not null,
+nome_nivel varchar(20) not null
+)engine=InnoDB default charset=utf8;
+
+insert into tbnivel (id_nivel, nome_nivel) 
+values (1,'Supervisor'),(2,'Comercial'),(3,'Cliente');
+
+
+-- Reserva
+create table tbreserva(
+id_reserva int(11) not null,
+id_tipo_reserva int not null,
+nome_reserva varchar(30) not null unique,
+email_reserva varchar(30) not null,
+cpf_reserva varchar(11) not null,
+senha_reserva varchar(8) not null,
+tipo_reserva enum('aniversario','confraternizacao','casamento','outros') not null
+)engine=InnoDB default charset=utf8;
+
+INSERT INTO `tbreserva` (`id_reserva`,`id_tipo_reserva`, `nome_reserva`, `email_reserva`, `cpf_reserva`,`senha_reserva`,`tipo_reserva`) VALUES
+(1, '01','josue', 'josue@hotmail.com', '52659874521','1212','outros'),
+(2, '02','bili', 'bili@gmail.com', '15987536547','3232','casamento');
+
 
 
 -- índices da tabela tbprodutos
@@ -83,6 +107,12 @@ modify id_tipo int(11) not null auto_increment, auto_increment=3;
 -- auto incremento da tbusuarios
 alter table tbusuarios
 modify id_usuario int(11) not null auto_increment, auto_increment=5;
+
+-- restrição (constraint) da tabela tbusuario
+alter table tbusuarios
+add constraint id_nivel_usuario_fk foreign key (id_nivel_usuario)
+references tbnivel (id_nivel) on delete no action  on update no action;
+
 
 -- Restrição (constraint) da tabela tbprodutos
 alter table tbprodutos
