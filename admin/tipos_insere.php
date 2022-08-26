@@ -59,10 +59,10 @@ $linha_fk = $lista_fk->fetch_assoc();
                     <div class="alert alert-danger" role="alert">
                         <form action="tipos_insere.php" name="tipos_insere.php" method="post" enctype="multipart/form-data">
 
-                                 <!--Inserir o campo id_produto oculto para uso no filtro -->
+                            <!--Inserir o campo id_tipo oculto para uso no filtro -->
                             <input type="hidden" name="id_tipo" id="id_tipo">
                             <!-- Select id_tipo_produto -->
-                            <label for="id_tipo_produto">Nível:</label>
+                            <label for="id_tipo">Nível:</label>
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>
@@ -83,26 +83,26 @@ $linha_fk = $lista_fk->fetch_assoc();
                                 </select>
                             </div>
                             <br>
-                            </div>
-                            <!-- Text descri_produto -->
-                            <label for="sigla_tipo">Sigla:</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                                </span>
-                                <input type="text" class="form-control" id="sigla_tipo" name="sigla_tipo" maxlength="100" required  placeholder="Digite a sigla do Tipo">
-                            </div>
-                            <br>
-                            <!-- Botão Enviar -->
-                            <input type="submit" value="Cadastrar" name="enviar" id="enviar" class="btn btn-danger btn-block">
-
-
-
-                        </form>
                     </div>
+                    <!-- Text descri_produto -->
+                    <label for="sigla_tipo">Sigla:</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        </span>
+                        <input type="text" class="form-control" id="sigla_tipo" name="sigla_tipo" maxlength="100" required placeholder="Digite a sigla do Tipo">
+                    </div>
+                    <br>
+                    <!-- Botão Enviar -->
+                    <input type="submit" value="Cadastrar" name="enviar" id="enviar" class="btn btn-danger btn-block">
 
+
+
+                    </form>
                 </div>
+
             </div>
+        </div>
 
         </div>
 

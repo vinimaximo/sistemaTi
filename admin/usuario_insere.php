@@ -46,7 +46,7 @@ $linha_fk = $lista_fk->fetch_assoc();
             <link rel="stylesheet" href="../css/meu_estilo.css" type="text/css">
 </head>
 
-<body>
+<body class="fundofixo">
     <?php include('menu_adm.php'); ?>
     <main class="container">
         <div class="row">
