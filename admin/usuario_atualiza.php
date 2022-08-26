@@ -118,7 +118,7 @@ $totalLinha_fk = $lista_fk->num_rows;
                             <label for="senha_usuario">Senha Usuário:</label>
                             <div class="input-group">
                                 <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                    <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
                                 </span>
                                 <input type="password" class="form-control" id="senha_usuario" name="senha_usuario" maxlength="12" required value="<?php echo $linha['senha_usuario']; ?>" placeholder="Digite o titulo do produto...">
                             </div>

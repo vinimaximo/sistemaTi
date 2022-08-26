@@ -122,7 +122,7 @@
                 </div><!-- Fecha botão Listar -->
                 <!-- botão Inserir -->
                 <div class="btn-group">
-                   <a href="usuarios_insere.php">
+                   <a href="usuario_insere.php">
                        <button class="btn btn-info">
                             Inserir
                         </button>
