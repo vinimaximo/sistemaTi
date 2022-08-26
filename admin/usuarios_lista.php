@@ -1,34 +1,31 @@
 <?php
-
 //Incluindo variaveis do sistema
-
 include ('../config.php');
 
 //Incluindo o sistema de autenticação
-
 include('acesso_com.php');
 
 //Incluindo o Arquivo de conexão
-
 include('../connections/conn.php');
 
-//Selecionando os dados e ordenando por ordem alfabetica
+//Buscando o nome do nível
+$consulta = "select u.id_usuario,
+u.login_usuario,
+u.id_nivel_usuario,
+n.nome_nivel
+from tbusuarios u
+INNER JOIN tbnivel n on u.id_nivel_usuario = n.id_nivel";
 
-$consulta = "select * from tbusuarios order by login_usuario asc";
-
-//Buscar a lista completa de usuarios
-
+// Buscar a lista completa de usuários
 $lista = $conn->query($consulta);
 
 //Separar usuarios por linha
-
 $linha = $lista->fetch_assoc();
 
 //Contar numero de linhas da lista
-
 $totalLinhas = $lista->num_rows;
-
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -64,22 +61,24 @@ $totalLinhas = $lista->num_rows;
                     <tr>
                     <tr>
                          <!-- Linha da tabela -->
-                         <td><?php echo $linha['id_usuario']; ?></td>
+                         <td><?php echo $linha['id_usuario']; ?></td>                       
                         <td>
-                            <span class="visible-xs"><?php echo $linha['nivel_usuario'];?></span>
+                            <span class="visible-xs"><?php echo $linha['nome_nivel'];?></span>
                             <span class="hidden-xs"><?php echo $linha['login_usuario'];?></span>
                         </td>
                         <td>
                             <?php
-                            if ($linha['nivel_usuario'] == 'sup') {
-                                echo ("<span class='glyphicon glyphicon-lock text-danger aria-hidden='true'></span>");
-                            } else if($linha['nivel_usuario'] == 'com') {
-                                echo ("<span class='glyphicon glyphicon-bitcoin text-info aria-hidden='true'></span>");
-                            } else if($linha['nivel_usuario'] == 'cli'){
+                            if ($linha['nome_nivel'] == 'Supervisor') {
+                                echo ("<span class='glyphicon glyphicon-briefcase text-danger aria-hidden='true'></span>");
+                            } else if($linha['nome_nivel'] == 'Comercial') {
+                                echo ("<span class='glyphicon glyphicon-shopping-cart text-info aria-hidden='true'></span>");
+                            } else if($linha['nome_nivel'] == 'Cliente'){
                                 echo ("<span class='glyphicon glyphicon-user text-success aria-hidden='true'></span>");
+                            } else{
+                                echo ("<span class='glyphicon glyphicon-remove text-danger aria-hidden='true'></span>");
                             }
                             ?>
-                            <?php echo $linha['nivel_usuario']; ?>
+                            <?php echo $linha['nome_nivel']; ?>
                         </td>  
                         <td>
                             <a href="usuario_atualiza.php?id_usuario=<?php echo $linha['id_usuario']; ?>" class="btn btn-warning btn-block btn-xs">

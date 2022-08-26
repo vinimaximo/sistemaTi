@@ -69,9 +69,9 @@ $linha_fk = $lista_fk->fetch_assoc();
                         <form action="produtos_insere.php" name="produtos_insere.php" method="post" enctype="multipart/form-data">
                             <!-- Seleciona o tipo do produto -->
                             <label for="id_tipo_produto">Tipo:</label>
-                            <div class="from-group">
+                            <div class="input-group">
                                 <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-task"></span>
+                                    <span class="glyphicon glyphicon-tasks"></span>
                                 </span>
                                 <select name="id_tipo_produto" id="id_tipo_produto" class="form-control" required>
                                 <?php do { ?>
