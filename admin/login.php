@@ -1,41 +1,79 @@
 <?php
 include('../connections/conn.php');
-// Inicia verificação do login
+// inicia verificação do login
 if ($_POST) {
-    //definindo o USE do banco de dados
+    // definindo o USE do banco de dados
+
+    # code...
+
     mysqli_select_db($conn, $database_conn);
-    //verifica login e senha recebidos
+
+    // verifica login e senha recebidos
     $login_usuario = $_POST['login_usuario'];
     $senha_usuario = $_POST['senha_usuario'];
 
-    $verificaSQL = "select * 
-    from tbusuarios 
-    where login_usuario = '$login_usuario' 
-    and senha_usuario = '$senha_usuario'
-    ";
-    echo $verificaSQL;
-    //carregar os dados e verificar a linha de retorno, caso exista
-    $lista_session = mysqli_query($conn, $verificaSQL);
-    $linha = $lista_session->fetch_assoc();
-    $numero_linhas = mysqli_num_rows($lista_session);
 
-    // se a sessão não existir, iniciamos uma sessão
+    $verificaSQL = "select * from tbusuarios where login_usuario = '$login_usuario' and senha_usuario = '$senha_usuario'";
+    //$verificaSQL = "select * from tbcliente where email_cliente = '$login_cliente' and senha_cliente = '$senha_cliente'";
+
+    // carregar os dados e verificar a linha de retorno, caso exista.
+    //$lista_session = $conn->query($verificaSQL);
+    $lista_session = mysqli_query($conn, $verificaSQL);
+    $linha  = $lista_session->fetch_assoc();
+    $numeroLinhas = mysqli_num_rows($lista_session);
+    // se a sessão não exixtir, iniciamos uma sessão
     if (!isset($_SESSION)) {
         $sessao_antiga = session_name("Chulettaaa");
         session_start();
-        $sessao_name_new = session_name(); //Recupera o nome atual
+        $sessao_name_new = session_name(); // recupera o nome atual
     }
-    if ($linha!=null) {
+    if ($linha != null) {
         $_SESSION['login_usuario'] = $login_usuario;
         $_SESSION['nivel_usuario'] = $linha['nivel_usuario'];
         $_SESSION['nome_da_sessao'] = session_name();
         echo "<script>window.open('index.php','_self')</script>";
 
-            }
-            
+        // verifica e Definindo o use do cliente no banco de dados
+    } else if ($_POST) {
+        //Definindo o use do cliente no banco de dados
+        mysqli_select_db($conn, $database_conn);
+
+        //Verifica login e senha recebidos do cliente
+
+        $login_reserva = $_POST['login_usuario'];
+        $senha_cliente = $_POST['senha_usuario'];
+        $cpf_reserva = $_POST['cpf_reserva'];
+        $verificaSQL = "select * from tbreserva where email_reserva = '$login_reserva' and senha_reserva = '$senha_reserva' and cpf_reserva = '$cpf_reserva'";
+
+         // carregar os dados e verificar a linha de retorno, caso exista.
+
+         $lista_session = mysqli_query($conn, $verificaSQL);
+
+         $linha = $lista_session->fetch_assoc();
+ 
+         $numeroLinhas =mysqli_num_rows($lista_session);
+
+        // se a sessão não exixtir, iniciamos uma sessão
+       
+
+        if (!isset($_SESSION)) {
+            $sessao_antiga = session_name("Chulettaaa");
+            session_start();
+            $sessao_name_new = session_name(); // recupera o nome atual
         }
-        
+        if ($linha != null) {
+            $_SESSION['login_usuario'] =  $login_reserva;
+            $_SESSION['nivel_usuario'] = $linha['nivel_usuario'];
+            $_SESSION['nome_da_sessao'] = session_name();
+            echo "<script>window.open('../reserva/index.php','_self')</script>";
+        } else {
+            echo "<script>window.open('invasor.php','_self')</script>";
+        }
+    }
+}
+
 ?>
+
 
 
 
@@ -75,6 +113,14 @@ if ($_POST) {
                                         </span>
                                         <input type="text" name="login_usuario" id="login_usuario" class="form-control" autofocus required autocomplete="off" placeholder="Digite seu login.">
                                     </p>
+                                    <label for="cpf_reserva">CPF:</label>
+                                    <p class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-paperclip text-info" aria-hidden="true"></span>
+                                        </span>
+                                        <input maxlength="11" type="text" name="cpf_reserva" id="cpf_reserva" class="form-control" autofocus  autocomplete="off" placeholder="Digite seu CPF.">
+                                    </p>
+
                                     <label for="senha_usuario">Senha:</label>
                                     <p class="input-group">
                                         <span class="input-group-addon">
