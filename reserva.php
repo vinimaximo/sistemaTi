@@ -18,7 +18,7 @@ include('connections/conn.php');
         <h2 class="breadcrumb alert-danger">Reservas</h2>
         <div class="b">
 
-            <a href="reserva/area_cliente.php">
+            <a href="reserva/regras_reserva.php">
                 <button class=" btn btn-success btn-block ">
                     <h3 class=" alert-success"><i> Reserve aqui!</i></h3>
                 </button>

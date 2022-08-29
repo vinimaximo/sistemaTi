@@ -1,6 +1,4 @@
 <?php
-//Sistema de autenticação
-include('acesso_com.php');
 //Variaveis de ambiente
 include('../config.php');
 //Conexão com banco
@@ -8,14 +6,16 @@ include('../connections/conn.php');
 
 
 if($_POST){
-    
-$login_reserva = $_POST['login_usuario'];
+ $id_tipo_reserva = $_POST['id_tipo_reserva'];
+ $email_reserva = $_POST['email_reserva'];
+ $tipo_reserva = $_POST['tipo_reserva']; 
+$login_reserva = $_POST['login_reserva'];
 $senha_cliente = $_POST['senha_usuario'];
 $cpf_reserva = $_POST['cpf_reserva'];
 
-$campos_insert = "id_tipo_produto,destaque_produto,descri_produto,resumo_produto,valor_produto,imagem_produto";
-$values = "$id_tipo_produto,'$destaque_produto','$descri_produto','$resumo_produto',$valor_produto,'$imagem_produto'";
-$query = "insert into tbprodutos ($campos_insert) values ($values);";
+$campos_insert = "id_tipo_reserva,email_reserva,tipo_reserva,login_reserva,senha_usuario,cpf_reserva";
+$values = "$id_tipo_reserva,'$email_reserva','$tipo_reserva','$login_reserva',$senha_usuario,'$cpf_reserva'";
+$query = "insert into tbreserva ($campos_insert) values ($values);";
 $resultado = $conn->query($query);
 
 //Após o insert redireciona a página
@@ -27,7 +27,7 @@ if(mysqli_insert_id($conn)){
 }
 
 //Chave estrangeira tipo
-$query_tipo = "select * from tbtipos order by rotulo_tipo asc";
+$query_tipo = "select * from tbreserva order by login_reserva asc";
 $lista_fk = $conn->query($query_tipo);
 $linha_fk = $lista_fk->fetch_assoc();
 ?>
@@ -37,23 +37,23 @@ $linha_fk = $lista_fk->fetch_assoc();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo SYS_NAME; ?> - Insere Produtos</title>
+    <title><?php echo SYS_NAME; ?> - Reserva</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="../css/meu_estilo.css" type="text/css">
 </head>
 
 <body class="fundofixo">
-    <?php include('menu_adm.php'); ?>
+   
     <main class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-2 col-md-8">
                 <h3 class="breadcrumb text-warning">
-                    <a href="produtos_lista.php">
+                    <a href="regras_reserva.php">
                         <button class="btn btn-danger">
                             <span class="glyphicon glyphicon-chevron-left"></span>
                         </button>
                     </a>
-                    Inserindo Produtos
+                   Reserve Aqui
                 </h3>
                 <div class="thumbnail">
                     <div class="alert alert-danger" role="alert">
@@ -131,8 +131,9 @@ $linha_fk = $lista_fk->fetch_assoc();
             </div>
         </div>
 
-
+        <?php include('area_reserva.php'); ?>
     </main>
+    
     <script>
         document.getElementById("imagem_produto").onchange = function() {
             var reader = new FileReader();

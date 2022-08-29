@@ -9,7 +9,7 @@
 </head>
 <body class="fundofixo">
     <main class="container">
-    <h1 class="breadcrumb">Área Da Reserva</h1>
+    <h1 class="breadcrumb col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-2 col-md-8">Área Da Reserva</h1>
     <div class="row">
         
         <!-- ADM TIPOS -->
