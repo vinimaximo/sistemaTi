@@ -3,14 +3,14 @@
 include ('../config.php');
 
 //Incluindo o sistema de autenticação
-include('acesso_com.php');
+
 
 //Incluindo o Arquivo de conexão
 include('../connections/conn.php');
 
 //Buscando o nome do nível
 //Selecionando os dados
-$consulta = "select * from tbreserva order by rotulo_tipo asc";
+$consulta = "select * from tbreserva order by data_reserva asc";
 
 // Buscar a lista completa de usuários
 $lista = $conn->query($consulta);
@@ -34,14 +34,20 @@ $totalLinhas = $lista->num_rows;
 </head>
 
 <body class="fundofixo">
-    <?php include('menu_adm.php'); ?>
+    <?php include('menu_reserva.php'); ?>
     <main class="container">
-    <h1 class="breadcrumb alert-danger">Lista de Usuarios</h1>
+    <h1 class="breadcrumb alert-danger">Reservas</h1>
         <table class="table table-condensed table-hover tbopacidade" style="background-color: #afd9ee;">
             <thead>
                 <th>Id</th>
-                <th>Login</th>
-                <th>Nivel</th>
+                <th>Nome</th>
+                <th>Data</th>
+                <th>Hora</th>
+                <th>Numero-Mesa</th>
+                <th>Numero-Pessoas</th>
+                <th>Cpf</th>
+                <th>Tipo-Reserva</th>
+
 
                 <th>
                     <a href="usuario_insere.php" class="btn btn-block btn-primary btn-xs">
@@ -57,34 +63,48 @@ $totalLinhas = $lista->num_rows;
                     <tr>
                     <tr>
                          <!-- Linha da tabela -->
-                         <td><?php echo $linha['id_usuario']; ?></td>                       
+                         <td><?php echo $linha['id_reserva']; ?></td>                       
                         <td>
-                            <span class="visible-xs"><?php echo $linha['nome_nivel'];?></span>
+                            <span class="visible-xs"><?php echo $linha['tipo_reserva'];?></span>
                             <span class="hidden-xs"><?php echo $linha['login_reserva'];?></span>
+                           
                         </td>
+                        <td> <span class="hidden-xs"><?php echo $linha['data_reserva'] ?></span></td>
+                        <td> <span class="hidden-xs"><?php echo $linha['hora_reserva'] ?></span></td>
+                        <td> <span class="hidden-xs"><?php echo $linha['numero_mesa_reserva'] ?></span></td>
+                        <td> <span class="hidden-xs"><?php echo $linha['numero_pessoas_reserva'] ?></span></td>
+                        <td> <span class="hidden-xs"><?php echo $linha['cpf_reserva'] ?></span></td>
+
+
+
                         <td>
                             <?php
-                            if ($linha['nome_nivel'] == 'Supervisor') {
-                                echo ("<span class='glyphicon glyphicon-briefcase text-danger aria-hidden='true'></span>");
-                            } else if($linha['nome_nivel'] == 'Comercial') {
-                                echo ("<span class='glyphicon glyphicon-shopping-cart text-info aria-hidden='true'></span>");
-                            } else if($linha['nome_nivel'] == 'Cliente'){
-                                echo ("<span class='glyphicon glyphicon-user text-success aria-hidden='true'></span>");
+                            if ($linha['tipo_reserva'] == 'Casamento') {
+                                echo ("<span class='glyphicon glyphicon- text-danger aria-hidden='true'></span>");
+                            } else if($linha['tipo_reserva'] == 'Aniversario') {
+                                echo ("<span class='glyphicon glyphicon-shopping- text-info aria-hidden='true'></span>");
+                            } else if($linha['tipo_reserva'] == 'etc...'){
+                                echo ("<span class='glyphicon glyphicon- text-success aria-hidden='true'></span>");
                             } else{
-                                echo ("<span class='glyphicon glyphicon-remove text-danger aria-hidden='true'></span>");
+                                echo ("<span class='glyphicon glyphicon- text-danger aria-hidden='true'></span>");
                             }
                             ?>
-                            <?php echo $linha['nome_nivel']; ?>
+                            <?php echo $linha['tipo_reserva']; ?>
                         </td>  
+
+
+
+
+
                         <td>
-                            <a href="usuario_atualiza.php?id_usuario=<?php echo $linha['id_usuario']; ?>" class="btn btn-warning btn-block btn-xs">
+                            <a href="reserva_atualiza.php?id_reserva=<?php echo $linha['id_reserva']; ?>" class="btn btn-warning btn-block btn-xs">
                                 <span class="hidden-xs">Alterar <br></span>
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                             </a>
                             <button class="btn btn-danger btn-block btn-xs delete" 
                             role="button" 
-                            data-nome="<?php echo $linha['login_usuario'];?>" 
-                            data-id="<?php echo $linha['id_usuario'];?>">
+                            data-nome="<?php echo $linha['login_reserva'];?>" 
+                            data-id="<?php echo $linha['id_reserva'];?>">
                             <span class="hidden-xs">Excluir <br></span>
                             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                             </button>

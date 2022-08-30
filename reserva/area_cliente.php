@@ -22,9 +22,9 @@ if ($_POST) {
 
     //Após o insert redireciona a página
     if (mysqli_insert_id($conn)) {
-        header("location:login_reserva.php");
+        header("location:reserva_lista.php");
     } else {
-        header("location:login_reserva.php");
+        header("location:reserva_lista.php");
     }
 }
 

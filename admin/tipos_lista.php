@@ -63,6 +63,7 @@ $totalLinhas = $lista->num_rows;
                     <td>
                             <span class="visible-xs"><?php echo $linha['rotulo_tipo'] ?></span>
                             <span class="hidden-xs"><?php echo $linha['sigla_tipo'] ?></span>
+                            
 
                         </td>
                         <td>
