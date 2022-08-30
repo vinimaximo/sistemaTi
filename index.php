@@ -28,8 +28,10 @@ include('config.php');
         <?php include('produtos_geral.php');?>
        <hr>
        <!-- Área de Reserva  -->
+       
        <a name="reserva">&nbsp;</a>
         <?php include('reserva.php');?>
+       
        
         <!-- Área de rodapé -->
         <footer>

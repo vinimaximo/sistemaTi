@@ -16,7 +16,10 @@ include('connections/conn.php');
 <body class="fundofixo">
     <main class="container">
         <h2 class="breadcrumb alert-danger">Reservas</h2>
+               <!-- Área do caroussel -->
+               <?php include('carouselis.php');?>
         <div class="b">
+            
 
             <a href="reserva/regras_reserva.php">
                 <button class=" btn btn-success btn-block ">
