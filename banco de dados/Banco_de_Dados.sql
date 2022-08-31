@@ -69,7 +69,6 @@ values (1,'Supervisor'),(2,'Comercial'),(3,'Cliente');
 -- Reserva
 create table tbreserva(
 id_reserva int(11) not null,
-id_tipo_reserva int not null,
 nome_nivel  varchar(20) not null,
 data_reserva date not null,
 hora_reserva time not null,
@@ -79,13 +78,15 @@ login_reserva varchar(30) not null unique,
 email_reserva varchar(30) not null,
 cpf_reserva varchar(11) not null,
 senha_reserva varchar(8) not null,
-tipo_reserva enum('aniversario','confraternizacao','casamento','outros') not null
+motivo_reserva enum('aniversario','confraternizacao','casamento','outros') not null
 )engine=InnoDB default charset=utf8;
 
-INSERT INTO `tbreserva` (`id_reserva`,`id_tipo_reserva`,`nome_nivel`,`data_reserva`,`hora_reserva`,`numero_mesa_reserva`,`numero_pessoas_reserva`, `login_reserva`, `email_reserva`, `cpf_reserva`,`senha_reserva`,`tipo_reserva`) VALUES
-(1, '01','cliente','2022-09-10','19:00:00','3','8','josue', 'josue@hotmail.com', '52659874521','1212','outros'),
-(3, '03','cliente','2022-09-11','19:00:00','2','6','vini', 'vini@vini.com', '11111111111','1313','outros'),
-(2, '02','cliente','2022-09-12','19:00:00','1','3','bili', 'bili@gmail.com', '15987536547','3232','casamento');
+INSERT INTO `tbreserva` (`nome_nivel`,`data_reserva`,`hora_reserva`,`numero_mesa_reserva`,`numero_pessoas_reserva`, `login_reserva`, `email_reserva`, `cpf_reserva`,`senha_reserva`,`motivo_reserva`) VALUES
+( '01','2022-09-10','19:00:00','3','8','josue', 'josue@hotmail.com', '52659874521','1212','outros'),
+( '03','2022-09-11','19:00:00','2','6','vinizin', 'vini@vini.com', '11111111111','1313','outros'),
+( '02','2022-09-12','19:00:00','1','3','bili', 'bili@gmail.com', '15987536547','3232','casamento'),
+( '04','2022-10-12','20:00:00','4','4','well', 'well@gmail.com', '99999999999','9999','casamento');
+
 
 
 
