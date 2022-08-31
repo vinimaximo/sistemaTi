@@ -10,16 +10,17 @@ include('../connections/conn.php');
 
 //Buscando o nome do nível
 //Selecionando os dados
-$consulta = "select * from tbreserva order by data_reserva asc";
+$consulta = "select * from tbreserva  order by data_reserva asc";
 
 // Buscar a lista completa de usuários
 $lista = $conn->query($consulta);
 
-//Separar usuarios por linha
+//Separar reserva por linha
 $linha = $lista->fetch_assoc();
 
 //Contar numero de linhas da lista
 $totalLinhas = $lista->num_rows;
+
 ?>
 
 <!DOCTYPE html>
@@ -30,13 +31,20 @@ $totalLinhas = $lista->num_rows;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="../css/meu_estilo.css" type="text/css">
-    <title><?php echo SYS_NAME." - Lista(". $totalLinhas; ?>) Usuarios</title>
+    <title><?php echo SYS_NAME." - Lista(". $totalLinhas; ?>) Reserva</title>
 </head>
 
 <body class="fundofixo">
     <?php include('menu_reserva.php'); ?>
     <main class="container">
-    <h1 class="breadcrumb alert-danger">Reservas</h1>
+    <h3 class="breadcrumb text-warning">
+                    <a href="index.php">
+                        <button class="btn btn-danger">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </button>
+                    </a>
+                    Reservas
+                </h3>
         <table class="table table-condensed table-hover tbopacidade" style="background-color: #afd9ee;">
             <thead>
                 <th>Id</th>
@@ -50,7 +58,7 @@ $totalLinhas = $lista->num_rows;
 
 
                 <th>
-                    <a href="usuario_insere.php" class="btn btn-block btn-primary btn-xs">
+                    <a href="reserva.php" class="btn btn-block btn-primary btn-xs">
                         <span class="hidden-xs">Adicionar<br></span>
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     </a>
@@ -65,7 +73,7 @@ $totalLinhas = $lista->num_rows;
                          <!-- Linha da tabela -->
                          <td><?php echo $linha['id_reserva']; ?></td>                       
                         <td>
-                            <span class="visible-xs"><?php echo $linha['tipo_reserva'];?></span>
+                            <span class="visible-xs"><?php echo $linha['motivo_reserva'];?></span>
                             <span class="hidden-xs"><?php echo $linha['login_reserva'];?></span>
                            
                         </td>
@@ -79,17 +87,17 @@ $totalLinhas = $lista->num_rows;
 
                         <td>
                             <?php
-                            if ($linha['tipo_reserva'] == 'Casamento') {
+                            if ($linha['motivo_reserva'] == 'Casamento') {
                                 echo ("<span class='glyphicon glyphicon- text-danger aria-hidden='true'></span>");
-                            } else if($linha['tipo_reserva'] == 'Aniversario') {
+                            } else if($linha['motivo_reserva'] == 'Aniversario') {
                                 echo ("<span class='glyphicon glyphicon-shopping- text-info aria-hidden='true'></span>");
-                            } else if($linha['tipo_reserva'] == 'etc...'){
+                            } else if($linha['motivo_reserva'] == 'etc...'){
                                 echo ("<span class='glyphicon glyphicon- text-success aria-hidden='true'></span>");
                             } else{
                                 echo ("<span class='glyphicon glyphicon- text-danger aria-hidden='true'></span>");
                             }
                             ?>
-                            <?php echo $linha['tipo_reserva']; ?>
+                            <?php echo $linha['motivo_reserva']; ?>
                         </td>  
 
 
@@ -97,10 +105,7 @@ $totalLinhas = $lista->num_rows;
 
 
                         <td>
-                            <a href="reserva_atualiza.php?id_reserva=<?php echo $linha['id_reserva']; ?>" class="btn btn-warning btn-block btn-xs">
-                                <span class="hidden-xs">Alterar <br></span>
-                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                            </a>
+                            
                             <button class="btn btn-danger btn-block btn-xs delete" 
                             role="button" 
                             data-nome="<?php echo $linha['login_reserva'];?>" 
@@ -132,7 +137,7 @@ $totalLinhas = $lista->num_rows;
                     <h4 class="modal-title text-danger">Atenção</h4>
                 </div>
                 <div class="modal-body">
-                    Deseja Realmente  <strong>Excluir</strong> Este Usuario ?
+                    Deseja Realmente  <strong>Excluir</strong> Esta Reserva  ?
                     <h3><span class="text-danger nome"></span></h3>
                 </div>
                 <div class="modal-footer">
@@ -158,7 +163,7 @@ $totalLinhas = $lista->num_rows;
             //Insere o nome do item na confirmação do Modal
             $('span.nome').text(nome);
             //Envia o id através do link do botão para confirmar 
-            $('a.delete-yes').attr('href','usuario_excluir.php?id_usuario='+id);
+            $('a.delete-yes').attr('href','excluir_reserva.php?id_reserva='+id);
             //Abre o Modal
             $('#myModal').modal('show');
         })

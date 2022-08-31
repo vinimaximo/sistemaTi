@@ -26,10 +26,13 @@
                 <ul class="nav navbar-nav navbar-right">
                 <li>
                         <button type="button" class="btn btn-danger navbar-btn disabled">
-                            Olá, <?php echo$_SESSION['login_usuario'];?>
-                        </button>                 
+                            Olá, <?php echo$_SESSION['login_reserva'];?>
+                        </button>    
+                        
+                                 
                       
                     </li>
+                    <li class="active"><a href="../admin/login.php">Admin</a></li>
                     <li><a href="index.php">Reservas</a></li>
                     <li class="active"><a href="../index.php"><span class="glyphicon glyphicon-home"></span></a></li>
                     <li><a href="logut.php"><span class="glyphicon glyphicon-log-out"></span></a></li>

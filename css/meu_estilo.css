@@ -42,3 +42,11 @@
     font-family: Anek Telug;
     font-weight: 600;
   }
+  .botao-login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  color: yellowgreen;
+   
+  }
+  

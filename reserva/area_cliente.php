@@ -5,31 +5,35 @@ include('../config.php');
 include('../connections/conn.php');
 
 
+
+
 if ($_POST) {
-    $id_tipo_reserva = $_POST['id_tipo_reserva'];
-    $email_reserva = $_POST['email_reserva'];
-    $tipo_reserva = $_POST['tipo_reserva'];
+    try {
+     $motivo_reserva = $_POST['motivo_reserva'];
     $data_reserva = $_POST['data_reserva'];
     $hora_reserva = $_POST['hora_reserva'];
     $login_reserva = $_POST['login_reserva'];
-    $senha_cliente = $_POST['senha_usuario'];
     $cpf_reserva = $_POST['cpf_reserva'];
 
-    $campos_insert = "id_tipo_reserva,email_reserva,tipo_reserva,login_reserva,senha_usuario,cpf_reserva";
-    $values = "$id_tipo_reserva,'$email_reserva','$tipo_reserva','$login_reserva',$senha_usuario,'$cpf_reserva'";
+    $campos_insert = "email_reserva,motivo_reserva,data_reserva,hora_reserva,login_reserva,senha_reserva,cpf_reserva";
+    $values = "NULL,'$motivo_reserva','$data_reserva','$hora_reserva','$login_reserva',NULL,'$cpf_reserva'";
     $query = "insert into tbreserva ($campos_insert) values ($values);";
     $resultado = $conn->query($query);
 
     //Após o insert redireciona a página
     if (mysqli_insert_id($conn)) {
-        header("location:reserva_lista.php");
+       header("location:login_reserva.php");
     } else {
-        header("location:reserva_lista.php");
+       header("location:login_reserva.php");
     }
+    } catch (\Throwable $e) {
+       echo $e;
+    }
+   
 }
 
 //Chave estrangeira tipo
-$query_tipo = "select * from tbreserva order by login_reserva asc";
+$query_tipo = "select * from tbreserva order by id_reserva asc";
 $lista_fk = $conn->query($query_tipo);
 $linha_fk = $lista_fk->fetch_assoc();
 ?>
@@ -66,18 +70,12 @@ $linha_fk = $lista_fk->fetch_assoc();
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-tasks"></span>
                                 </span>
-                                <select name="id_tipo_reserva" id="id_tipo_reserva" class="form-control" required>
-                                    <?php do { ?>
-                                        <option value="<?php echo $linha_fk['id_reserva']; ?>">
-                                            <?php echo $linha_fk['tipo_reserva']; ?>
-                                        </option>
-                                    <?php } while ($linha_fk = $lista_fk->fetch_assoc());
-                                    $linha_fk = mysqli_num_rows($lista_fk);
-                                    if ($linha_fk > 0) {
-                                        mysqli_data_seek($lista_fk, 0);
-                                        $linha_fk = $lista_fk->fetch_assoc();
-                                    }
-                                    ?>
+                                <select name="motivo_reserva" id="
+                                    tipo_reserva" class="form-control" required>
+                                    <option value="casamento">Casamento</option>
+                                    <option value="outros">Outros</option>
+                                    <option value="confraternizacao">Confraternização</option>
+                                    <option value="aniversario">Aniversario</option>
                                 </select>
                             </div>
                             <br>
@@ -103,7 +101,7 @@ $linha_fk = $lista_fk->fetch_assoc();
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span>
                                 </span>
-                                <input type="time" class="form-control" name="hora_reserva" id="hora_reserva" min="0" step="0.01">
+                                <input type="time" class="form-control" name="hora_reserva" id="hora_reserva">
                             </div>
                             <br>
                             <label for="login_reserva">Nome Completo:</label>
@@ -111,7 +109,7 @@ $linha_fk = $lista_fk->fetch_assoc();
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                                 </span>
-                                <input type="text" class="form-control" name="login_reserva" id="login_reserva" placeholder="Digite o CPF do" maxlength="100" required>
+                                <input type="text" class="form-control" name="login_reserva" id="login_reserva" placeholder="Digite o Nome completo." maxlength="100" required>
                             </div>
                             <br>
                             <input type="submit" value="Cadastrar" name="enviar" id="enviar" class="btn btn-danger">
@@ -122,7 +120,7 @@ $linha_fk = $lista_fk->fetch_assoc();
             </div>
         </div>
 
-        <?php include('area_reserva.php'); ?>
+
     </main>
 
 

@@ -6,8 +6,8 @@ if (!isset($_SESSION)){
     session_start();
 }
 
-//Verifica se há usuario logado na sessão
-//Identifica o usuario
+//Verifica se há reserva logado na sessão
+//Identifica o reserva
 if(!isset($_SESSION['login_reserva'])){
     // Se não existir destruimos a sessão por segurança
     header("location: login_reserva.php");

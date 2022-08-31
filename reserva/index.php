@@ -1,6 +1,6 @@
 <?php
 // Incluindo o sistema de autenticação
-   include('../admin/acesso_com.php');
+   include('acesso_com.php');
     include('../config.php');
 ?> 
 <!DOCTYPE html>
@@ -12,5 +12,6 @@
 <body>
     <?php include('reserva_cliente.php')?>
     <?php include('area_reserva.php')?>
+   
 </body>
 </html>

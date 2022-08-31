@@ -10,12 +10,12 @@ include('../connections/conn.php');
 
 //Buscando o nome do nível
 //Selecionando os dados
-$consulta = "select * from tbreserva order by rotulo_tipo asc";
+$consulta = "select * from tbreserva order by tipo_reserva asc";
 
 // Buscar a lista completa de usuários
 $lista = $conn->query($consulta);
 
-//Separar usuarios por linha
+//Separar reserva por linha
 $linha = $lista->fetch_assoc();
 
 //Contar numero de linhas da lista
@@ -30,13 +30,13 @@ $totalLinhas = $lista->num_rows;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="../css/meu_estilo.css" type="text/css">
-    <title><?php echo SYS_NAME." - Lista(". $totalLinhas; ?>) Usuarios</title>
+    <title><?php echo SYS_NAME." - Lista(". $totalLinhas; ?>) Reserva</title>
 </head>
 
 <body class="fundofixo">
     <?php include('menu_adm.php'); ?>
     <main class="container">
-    <h1 class="breadcrumb alert-danger">Lista de Usuarios</h1>
+    <h1 class="breadcrumb alert-danger">Lista de Reserva</h1>
         <table class="table table-condensed table-hover tbopacidade" style="background-color: #afd9ee;">
             <thead>
                 <th>Id</th>
@@ -44,7 +44,7 @@ $totalLinhas = $lista->num_rows;
                 <th>Nivel</th>
 
                 <th>
-                    <a href="usuario_insere.php" class="btn btn-block btn-primary btn-xs">
+                    <a href="area_cliente.php" class="btn btn-block btn-primary btn-xs">
                         <span class="hidden-xs">Adicionar<br></span>
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     </a>
@@ -57,7 +57,7 @@ $totalLinhas = $lista->num_rows;
                     <tr>
                     <tr>
                          <!-- Linha da tabela -->
-                         <td><?php echo $linha['id_usuario']; ?></td>                       
+                         <td><?php echo $linha['id_reserva']; ?></td>                       
                         <td>
                             <span class="visible-xs"><?php echo $linha['nome_nivel'];?></span>
                             <span class="hidden-xs"><?php echo $linha['login_reserva'];?></span>
@@ -77,14 +77,14 @@ $totalLinhas = $lista->num_rows;
                             <?php echo $linha['nome_nivel']; ?>
                         </td>  
                         <td>
-                            <a href="usuario_atualiza.php?id_usuario=<?php echo $linha['id_usuario']; ?>" class="btn btn-warning btn-block btn-xs">
+                            <a href="reserva_atualiza.php?id_reserva=<?php echo $linha['id_reserva']; ?>" class="btn btn-warning btn-block btn-xs">
                                 <span class="hidden-xs">Alterar <br></span>
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                             </a>
                             <button class="btn btn-danger btn-block btn-xs delete" 
                             role="button" 
-                            data-nome="<?php echo $linha['login_usuario'];?>" 
-                            data-id="<?php echo $linha['id_usuario'];?>">
+                            data-nome="<?php echo $linha['login_reserva'];?>" 
+                            data-id="<?php echo $linha['id_reserva'];?>">
                             <span class="hidden-xs">Excluir <br></span>
                             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                             </button>
@@ -112,7 +112,7 @@ $totalLinhas = $lista->num_rows;
                     <h4 class="modal-title text-danger">Atenção</h4>
                 </div>
                 <div class="modal-body">
-                    Deseja Realmente  <strong>Excluir</strong> Este Usuario ?
+                    Deseja Realmente  <strong>Excluir</strong> Esta Reserva  ?
                     <h3><span class="text-danger nome"></span></h3>
                 </div>
                 <div class="modal-footer">
@@ -138,7 +138,7 @@ $totalLinhas = $lista->num_rows;
             //Insere o nome do item na confirmação do Modal
             $('span.nome').text(nome);
             //Envia o id através do link do botão para confirmar 
-            $('a.delete-yes').attr('href','usuario_excluir.php?id_usuario='+id);
+            $('a.delete-yes').attr('href','excluir_reserva.php?id_reserva='+id);
             //Abre o Modal
             $('#myModal').modal('show');
         })

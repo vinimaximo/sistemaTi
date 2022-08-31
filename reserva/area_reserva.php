@@ -17,6 +17,7 @@
                 <div class="thumbnail alert-warning">
                     <img src="../imagens/icone_tipos.png" alt="">
                     <br>
+                    
                     <div class="alert-warning">
                         <!-- Botão principal -->
                         <div class="btn btn-group btn-group-justified" role="group">
