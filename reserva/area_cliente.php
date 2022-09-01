@@ -14,9 +14,10 @@ if ($_POST) {
     $hora_reserva = $_POST['hora_reserva'];
     $login_reserva = $_POST['login_reserva'];
     $cpf_reserva = $_POST['cpf_reserva'];
+    $senha_reserva = $_POST['senha_reserva'];
 
     $campos_insert = "email_reserva,motivo_reserva,data_reserva,hora_reserva,login_reserva,senha_reserva,cpf_reserva";
-    $values = "NULL,'$motivo_reserva','$data_reserva','$hora_reserva','$login_reserva',NULL,'$cpf_reserva'";
+    $values = "NULL,'$motivo_reserva','$data_reserva','$hora_reserva','$login_reserva',$senha_reserva,'$cpf_reserva'";
     $query = "insert into tbreserva ($campos_insert) values ($values);";
     $resultado = $conn->query($query);
 
@@ -110,6 +111,14 @@ $linha_fk = $lista_fk->fetch_assoc();
                                     <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                                 </span>
                                 <input type="text" class="form-control" name="login_reserva" id="login_reserva" placeholder="Digite o Nome completo." maxlength="100" required>
+                            </div>
+                            <br>
+                            <label for="senha_reserva">Senha:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-screenshot" aria-hidden="true"></span>
+                                </span>
+                                <input type="number" class="form-control" name="senha_reserva" id="senha_reserva" placeholder="Digite sua senha." maxlength="100" required>
                             </div>
                             <br>
                             <input type="submit" value="Cadastrar" name="enviar" id="enviar" class="btn btn-danger">

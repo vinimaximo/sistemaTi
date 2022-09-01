@@ -94,7 +94,7 @@ if ($_POST) {
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-qrcode text-info" aria-hidden="true"></span>
                                         </span>
-                                        <input type="password" name="senha_reserva" id="senha_reserva" class="form-control" required autocomplete="off" placeholder="Digite sua senha.">
+                                        <input type="password" name="senha_reserva" id="senha_reserva" class="form-control"  autocomplete="off" placeholder="Digite sua senha.">
                                     </p>
                                     <p class="text-right">
                                         <input type="submit" value="Entrar" class="btn btn-primary">
